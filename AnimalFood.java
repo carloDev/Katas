@@ -8,6 +8,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/*
+Source: https://programmingpraxis.com/2021/01/12/animal-txt/
+*/
 public class AnimalFood {
 
 	class Animal {
