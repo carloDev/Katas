@@ -4,50 +4,55 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.TreeSet;
 
-/*
-Source: https://programmingpraxis.com/2021/01/12/animal-txt/
-*/
 public class AnimalFood {
 
-	class Animal {
-	
+	class Animal implements Comparable<Animal>{
+
 		public Animal() {
-			food = new HashSet<String>();
+			food = new TreeSet<String>();
 		}
-		
+
 		String name;
-		Set<String> food;
+		TreeSet<String> food;
+
 		public String getName() {
 			return name;
 		}
+
 		public void setName(String name) {
 			this.name = name;
 		}
-		public Set<String> getFood() {
+
+		public TreeSet<String> getFood() {
 			return food;
 		}
-		public void setFood(Set<String> food) {
+
+		public void setFood(TreeSet<String> food) {
 			this.food = food;
 		}
+
 		@Override
 		public String toString() {
 			return "Animal [name=" + name + ", food=" + food + "]";
 		}
+
+		public int compareTo(Animal o) {
+			return this.name.compareTo(o.getName());
+//			return 0;
+		}
 	}
-	
-	
+
 	public static void main(String[] args) {
 
 		try {
-			
+
 			AnimalFood outerObject = new AnimalFood();
-			List<Animal> animals = new ArrayList<Animal>();
+			TreeSet<Animal> animals = new TreeSet<Animal>();
 			AnimalFood.Animal innerObject = null;
-			
+
 			FileReader fw = new FileReader(
 					"D:\\WORK\\workspace\\code_kata\\codekatas\\src\\main\\resources\\input\\Animal.txt");
 			int data = fw.read();
@@ -56,7 +61,6 @@ public class AnimalFood {
 			String ate = " he ate ";
 			while (data != -1) {
 				readed.append((char) data);
-//			  }
 				data = fw.read();
 			}
 			fw.close();
@@ -72,21 +76,21 @@ public class AnimalFood {
 				if (line.contains(ate)) {
 					String food = line.split(ate)[1];
 					innerObject.food.add(food.trim());
-					
+
 				}
 			}
-			
-			StringBuilder out = new StringBuilder();
-			System.out.println(animals);
-			HashSet<String> fruits = new HashSet<String>();
+
+			TreeSet<String> fruits = new TreeSet<String>();
 			for (Animal row : animals) {
 				fruits.addAll(row.getFood());
 			}
-			
+
 			for (String fruit : fruits) {
-				System.out.println("Food: " + fruit + " Animals who ate it:" + count(animals,fruit));
+				System.out.println("Food: " + fruit + " Animals who ate it: " + count(animals, fruit));
+				System.out.println("========");
+				printAnimal(animals, fruit);
+				System.out.println("");
 			}
-			
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -96,8 +100,7 @@ public class AnimalFood {
 
 	}
 
-
-	private static int count(List<Animal> animals, String fruit) {
+	private static int count(TreeSet<Animal> animals, String fruit) {
 		int result = 0;
 		for (Animal animal : animals) {
 			if (animal.getFood().contains(fruit)) {
@@ -107,4 +110,13 @@ public class AnimalFood {
 		return result;
 	}
 
+	private static int printAnimal(TreeSet<Animal> animals, String fruit) {
+		int result = 0;
+		for (Animal animal : animals) {
+			if (animal.getFood().contains(fruit)) {
+				System.out.println(animal.getName());
+			}
+		}
+		return result;
+	}
 }
