@@ -3,10 +3,12 @@ package codekatas;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.TreeSet;
 
+/**
+ * https://programmingpraxis.com/2021/01/12/animal-txt/
+ *
+ */
 public class AnimalFood {
 
 	class Animal implements Comparable<Animal>{
