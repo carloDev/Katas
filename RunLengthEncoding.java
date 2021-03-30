@@ -2,6 +2,9 @@ package codekatas;
 
 import java.util.LinkedList;
 
+/*
+https://programmingpraxis.com/2021/02/09/run-length-encoding-2/
+*/
 public class RunLengthEncoding {
 
 	public static void main(String[] args) {
